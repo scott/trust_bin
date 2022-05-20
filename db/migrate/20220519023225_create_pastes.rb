@@ -8,6 +8,8 @@ class CreatePastes < ActiveRecord::Migration[7.0]
       t.text :content
       t.boolean :private, default: true
       t.datetime :deleted_at
+      t.integer :parent_id
+      t.integer :version, default: 1
 
       t.timestamps
     end

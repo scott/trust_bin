@@ -1,7 +1,8 @@
-<h1>Pastes#new</h1>
-<p>Find me in app/views/pastes/new.html.erb</p>
+<h1>Fork</h1>
 <%= simple_form_for @paste do |f| %>
   <%= f.input :name %>
   <%= f.input :content %>
+  <%= f.input :parent_id, as: :hidden %>
+  <%= f.input :version, as: :hidden %>
   <%= f.button :submit %>
 <% end %>

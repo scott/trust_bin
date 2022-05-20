@@ -19,6 +19,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_023225) do
     t.text "content"
     t.boolean "private", default: true
     t.datetime "deleted_at"
+    t.integer "parent_id"
+    t.integer "version", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shortlink"], name: "index_pastes_on_shortlink"
@@ -27,9 +29,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_023225) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "uuid"
+    t.string "first_name"
+    t.string "last_name"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "uuid"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
