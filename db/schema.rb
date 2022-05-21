@@ -15,7 +15,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_023225) do
     t.integer "user_id", null: false
     t.string "uuid"
     t.string "shortlink"
+    t.string "language"
     t.string "name"
+    t.string "description"
     t.text "content"
     t.boolean "private", default: true
     t.datetime "deleted_at"

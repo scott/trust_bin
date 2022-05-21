@@ -1,2 +1,12 @@
-<%= content_tag :h1, @paste.name %>
-<%= content_tag :p, @paste.content %>
+<%= content_tag :h4 do %>
+  <%= @paste.name %>
+  <%= content_tag :small, @paste.description, class: 'text-secondary' %>
+<% end %>
+<%= content_tag :pre, @paste.content.html_safe, class: "language-#{@paste.language} border border-secondary", style: 'height: 400px; overflow-y:auto;' %>
+<ul class="list-unstyled list-inline">
+    <li class="list-inline-item"><%= button_to 'fork', paste_fork_path(@paste.uuid), method: :get, class: 'btn btn-secondary' %></li>
+    <li class="list-inline-item"><%= button_to 'destroy', paste_path(@paste.uuid), method: :delete, class: 'btn btn-secondary' %></li>
+</ul>
+<br/>
+<%= content_tag :h4, "Revisions" if @versions.present? %>
+<%= render partial: 'version', collection: @versions %>

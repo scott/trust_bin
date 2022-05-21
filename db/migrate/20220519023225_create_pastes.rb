@@ -4,7 +4,9 @@ class CreatePastes < ActiveRecord::Migration[7.0]
       t.references :user, null: false, foreign_key: true
       t.string :uuid, index: true
       t.string :shortlink, index: true
+      t.string :language
       t.string :name
+      t.string :description
       t.text :content
       t.boolean :private, default: true
       t.datetime :deleted_at

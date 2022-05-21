@@ -6,6 +6,6 @@ class Paste < ApplicationRecord
 
   scope :pub, -> { where(private: false) }
   scope :priv, -> { where(private: true) }
-  scope :root, -> { where(parent_id: nil)}
-
+  scope :root, -> { where(parent_id: nil) }
+  scope :active, -> { where(deleted_at: nil) }
 end

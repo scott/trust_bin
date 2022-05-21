@@ -1,0 +1,4 @@
+<div id="paste-<%= version.uuid %>" class="paste border-bottom py-2">
+    <%= version.created_at %> - <%= version.name %> - <%= link_to 'view', paste_path(version.uuid) %> - <%= link_to 'fork', paste_fork_path(version.uuid) %> - <%= link_to 'destroy', paste_path(version.uuid), method: :delete, data: { confirm: "Are you sure you want to delete this?" } %><br/>
+    <%= version.description %>
+</div>

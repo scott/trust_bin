@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :pastes, param: :uuid do
+  resources :pastes, path: 'snippets', param: :uuid do
     get "fork" => "pastes#fork"
   end
 
