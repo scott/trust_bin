@@ -1,6 +1,6 @@
 <%= simple_form_for @snippet do |f| %>
   <%= f.input :name, as: :string, placeholder: 'Name this snippet', label: false %>
-  <%= f.input :language, collection: ['ruby','html','javascript','go','php','java','rust','text','markdown'], label: false, prompt: 'Language' %>
+  <%= f.input :language, collection: Snippet::LANGUAGES, label: false, prompt: 'Language', input_html: { onchange: "changeMode(this);" } %>
   <%= f.input :description, placeholder: 'Description', label: false  %>
   <style>
   .CodeMirror {
@@ -11,6 +11,7 @@
   <%= f.input :content, input_html: { value: @snippet.content.blank? ? "" : @snippet.content }, label: false, class: 'border border-secondary' %>
   <%= f.input :parent_id, as: :hidden %>
   <%= f.input :version, as: :hidden %>
+  <%= f.input :visibility, collection: ['private','org'] %>
   <br/>
   <%= f.button :submit, "Save", class: 'btn btn-primary' %>
 <% end %>
@@ -18,8 +19,12 @@
 var codeEditor = document.getElementById("snippet_content");
 var myCodeMirror = CodeMirror.fromTextArea(codeEditor, {
     lineNumbers: true,
-    mode: "htmlmixed",
-    theme: "javascript"
+    mode: null
   }
 );
+
+function changeMode(option) {
+  lang = document.getElementById("snippet_language").value;
+  myCodeMirror.display.mode = lang;
+}
 </script>

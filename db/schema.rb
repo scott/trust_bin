@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_023225) do
     t.string "name"
     t.string "description"
     t.text "content"
-    t.boolean "private", default: true
+    t.string "visibility", default: "private"
     t.datetime "deleted_at"
     t.integer "parent_id"
     t.integer "version", default: 1

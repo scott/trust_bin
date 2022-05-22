@@ -8,7 +8,7 @@ class CreateSnippets < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :description
       t.text :content
-      t.boolean :private, default: true
+      t.string :visibility, default: 'private'
       t.datetime :deleted_at
       t.integer :parent_id
       t.integer :version, default: 1

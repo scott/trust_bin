@@ -1,3 +1,5 @@
+
+
 <%= content_tag :h4 do %>
   <%= @snippet.name %>
   <%= content_tag :small, @current.description, class: 'text-secondary' %>
@@ -16,12 +18,12 @@
 <br/>
 <%= content_tag :h4, "Revisions" if @versions.present? %>
 <%= render partial: 'version', collection: @versions %>
-<%= render partial: 'version', object: @snippet if @versions.size > 0 %>
 <script>
 var codeEditor = document.getElementById("snippet_content");
 var myCodeMirror = CodeMirror.fromTextArea(codeEditor, {
-    lineNumbers: true,
-    mode: "htmlmixed"
+    lineNumbers: false,
+    mode: "<%= @snippet.language %>",
+    readOnly: 'nocursor'
   }
 );
 </script>
