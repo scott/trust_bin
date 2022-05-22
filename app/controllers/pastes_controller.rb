@@ -6,6 +6,7 @@ class PastesController < ApplicationController
   def show
     @paste = current_user.pastes.active.where(uuid: params[:uuid]).order(version: :desc).first
     @versions = current_user.pastes.active.where(parent_id: @paste.id).order(version: :desc)
+    @current = @versions.size > 0 ? @versions.first : @paste
   end
 
   def new

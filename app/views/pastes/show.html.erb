@@ -1,12 +1,27 @@
 <%= content_tag :h4 do %>
   <%= @paste.name %>
-  <%= content_tag :small, @paste.description, class: 'text-secondary' %>
+  <%= content_tag :small, @current.description, class: 'text-secondary' %>
 <% end %>
-<%= content_tag :pre, @paste.content.html_safe, class: "language-#{@paste.language} border border-secondary", style: 'height: 400px; overflow-y:auto;' %>
+<style>
+.CodeMirror {
+  min-height: 600px;
+  height: auto;
+}
+</style>
+<%= text_area_tag "paste_content", @current.content %>
 <ul class="list-unstyled list-inline">
-    <li class="list-inline-item"><%= button_to 'fork', paste_fork_path(@paste.uuid), method: :get, class: 'btn btn-secondary' %></li>
-    <li class="list-inline-item"><%= button_to 'destroy', paste_path(@paste.uuid), method: :delete, class: 'btn btn-secondary' %></li>
+    <li class="list-inline-item"><%= button_to 'edit', paste_fork_path(@current.uuid), method: :get, class: 'btn btn-secondary' %></li>
+    <li class="list-inline-item"><%= button_to 'destroy', paste_path(@current.uuid), method: :delete, class: 'btn btn-secondary' %></li>
 </ul>
 <br/>
 <%= content_tag :h4, "Revisions" if @versions.present? %>
 <%= render partial: 'version', collection: @versions %>
+<%= render partial: 'version', object: @paste if @versions.size > 0 %>
+<script>
+var codeEditor = document.getElementById("paste_content");
+var myCodeMirror = CodeMirror.fromTextArea(codeEditor, {
+    lineNumbers: true,
+    mode: "htmlmixed"
+  }
+);
+</script>

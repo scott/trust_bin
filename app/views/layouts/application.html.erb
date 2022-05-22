@@ -8,6 +8,10 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.4/codemirror.min.js" integrity="sha512-2cmTnLqUwlJs8HnJF3SvFKcsdRf65Ho7wof0IeydYXnyWCiVhaR6u2zTD/BFS+2mIywyiUscY1Er54SS+OJjEw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.4/codemirror.min.css" integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.4/mode/javascript/javascript.min.js" integrity="sha512-I6CdJdruzGtvDyvdO4YsiAq+pkWf2efgd1ZUSK2FnM/u2VuRASPC7GowWQrWyjxCZn6CT89s3ddGI+be0Ak9Fg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
 
   <body>
@@ -15,7 +19,17 @@
       <div class="row mt-3">
         <div class="col-8">
           <ul class="list-unstyled list-inline">
-            <li class="list-inline-item"><h3><strong>Trust</strong>bin</h3> Secure, self hosted code snippets</li>
+            <li class="list-inline-item">
+              <%= link_to root_path do %>
+                <%= content_tag :h3 do %>
+                  <%= content_tag :strong do %>
+                    Trustbin
+                  <% end %>
+                  
+                <% end %>
+              <% end %>
+              Secure, self hosted code snippets
+            </li>
           <ul>
         </div>
         <div class="col-4 float-end">

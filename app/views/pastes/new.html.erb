@@ -1,18 +1,25 @@
-<style>
-  pre { height: 700px; width: 100%; }
-</style>
-<script>
-  function getContent(){
-    document.getElementById("paste_content").value = document.getElementById("editor").innerHTML;
-  }
-</script>
-<%= simple_form_for @paste, html: { onsubmit: 'getContent();' } do |f| %>
+<%= simple_form_for @paste do |f| %>
   <%= f.input :name, as: :string, placeholder: 'Name this paste', label: false %>
   <%= f.input :language, collection: ['ruby','html','javascript','go','php','java','rust','text','markdown'], label: false, prompt: 'Language' %>
   <%= f.input :description, placeholder: 'Description', label: false  %>
-  <%= f.input :content, as: :hidden %>
+  <style>
+  .CodeMirror {
+      height: 600px;
+  }
+  </style>
+
+  <%= f.input :content, input_html: { value: @paste.content.blank? ? "" : @paste.content }, label: false, class: 'border border-secondary' %>
   <%= f.input :parent_id, as: :hidden %>
   <%= f.input :version, as: :hidden %>
-  <%= content_tag :pre, raw(@paste.content), contenteditable: true, id: 'editor', class: 'border border-secondary' %>
-  <%= f.button :submit, class: 'btn btn-primary' %>
+  <br/>
+  <%= f.button :submit, "Save", class: 'btn btn-primary' %>
 <% end %>
+<script>
+var codeEditor = document.getElementById("paste_content");
+var myCodeMirror = CodeMirror.fromTextArea(codeEditor, {
+    lineNumbers: true,
+    mode: "htmlmixed",
+    theme: "javascript"
+  }
+);
+</script>
