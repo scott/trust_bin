@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_05_19_023225) do
-  create_table "pastes", force: :cascade do |t|
+  create_table "snippets", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "uuid"
     t.string "shortlink"
@@ -25,15 +25,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_023225) do
     t.integer "version", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["shortlink"], name: "index_pastes_on_shortlink"
-    t.index ["user_id"], name: "index_pastes_on_user_id"
-    t.index ["uuid"], name: "index_pastes_on_uuid"
+    t.index ["shortlink"], name: "index_snippets_on_shortlink"
+    t.index ["user_id"], name: "index_snippets_on_user_id"
+    t.index ["uuid"], name: "index_snippets_on_uuid"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "uuid"
     t.string "first_name"
     t.string "last_name"
+    t.string "role", default: "user"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -46,5 +47,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_023225) do
     t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
-  add_foreign_key "pastes", "users"
+  add_foreign_key "snippets", "users"
 end

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :pastes, path: 'snippets', param: :uuid do
-    get "fork" => "pastes#fork"
+  resources :snippets, path: 'snippets', param: :uuid do
+    get "fork" => "snippets#fork"
   end
 
-  root to: "pastes#index"
+  root to: "snippets#index"
 end

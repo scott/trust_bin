@@ -34,11 +34,11 @@
         </div>
         <div class="col-4 float-end">
           <ul class="list-unstyled list-inline">
-            <li class="list-inline-item"><%= link_to 'All', pastes_path %></li>
-            <li class="list-inline-item"><%= link_to 'New', new_paste_path %></li>
-            <li class="list-inline-item"><%= current_user.email %></li>
+            <li class="list-inline-item"><%= link_to 'All', snippets_path %></li>
+            <li class="list-inline-item"><%= link_to 'New', new_snippet_path %></li>
+            <li class="list-inline-item"><%= current_user.email if signed_in? %></li>
             <li class="list-inline-item"><%= link_to 'Sign Out', destroy_user_session_path,
-              data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></li>
+              data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} if signed_in? %></li>
           <ul>
         </div>
         <div class="col-md-12">

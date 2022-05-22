@@ -1,0 +1,4 @@
+<div id="snippet-<%= version.uuid %>" class="snippet border-bottom py-2">
+    <%= version.created_at %> - <%= version.name %> - <%= link_to 'view', snippet_path(version.uuid) %> - <%= link_to 'fork', snippet_fork_path(version.uuid) %> - <%= link_to 'destroy', snippet_path(version.uuid), method: :delete, data: { confirm: "Are you sure you want to delete this?" } %><br/>
+    <%= version.description %>
+</div>

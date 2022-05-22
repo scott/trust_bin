@@ -1,23 +1,23 @@
 require "test_helper"
 
-class PastesControllerTest < ActionDispatch::IntegrationTest
+class SnippetsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get pastes_index_url
+    get snippets_index_url
     assert_response :success
   end
 
   test "should get show" do
-    get pastes_show_url
+    get snippets_show_url
     assert_response :success
   end
 
   test "should get new" do
-    get pastes_new_url
+    get snippets_new_url
     assert_response :success
   end
 
   test "should get update" do
-    get pastes_update_url
+    get snippets_update_url
     assert_response :success
   end
 end

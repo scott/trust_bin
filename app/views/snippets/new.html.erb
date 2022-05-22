@@ -1,5 +1,5 @@
-<%= simple_form_for @paste do |f| %>
-  <%= f.input :name, as: :string, placeholder: 'Name this paste', label: false %>
+<%= simple_form_for @snippet do |f| %>
+  <%= f.input :name, as: :string, placeholder: 'Name this snippet', label: false %>
   <%= f.input :language, collection: ['ruby','html','javascript','go','php','java','rust','text','markdown'], label: false, prompt: 'Language' %>
   <%= f.input :description, placeholder: 'Description', label: false  %>
   <style>
@@ -8,14 +8,14 @@
   }
   </style>
 
-  <%= f.input :content, input_html: { value: @paste.content.blank? ? "" : @paste.content }, label: false, class: 'border border-secondary' %>
+  <%= f.input :content, input_html: { value: @snippet.content.blank? ? "" : @snippet.content }, label: false, class: 'border border-secondary' %>
   <%= f.input :parent_id, as: :hidden %>
   <%= f.input :version, as: :hidden %>
   <br/>
   <%= f.button :submit, "Save", class: 'btn btn-primary' %>
 <% end %>
 <script>
-var codeEditor = document.getElementById("paste_content");
+var codeEditor = document.getElementById("snippet_content");
 var myCodeMirror = CodeMirror.fromTextArea(codeEditor, {
     lineNumbers: true,
     mode: "htmlmixed",

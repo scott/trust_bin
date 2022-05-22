@@ -3,6 +3,3 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "popper"
 import "bootstrap"
-import "highlightjs"
-
-import { HighlightJS } from "highlight.js"

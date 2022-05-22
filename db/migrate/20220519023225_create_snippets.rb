@@ -1,6 +1,6 @@
-class CreatePastes < ActiveRecord::Migration[7.0]
+class CreateSnippets < ActiveRecord::Migration[7.0]
   def change
-    create_table :pastes do |t|
+    create_table :snippets do |t|
       t.references :user, null: false, foreign_key: true
       t.string :uuid, index: true
       t.string :shortlink, index: true

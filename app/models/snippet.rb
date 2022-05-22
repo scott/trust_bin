@@ -1,4 +1,4 @@
-class Paste < ApplicationRecord
+class Snippet < ApplicationRecord
   belongs_to :user
 
   encrypts :content

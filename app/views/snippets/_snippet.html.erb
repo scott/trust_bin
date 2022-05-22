@@ -1,0 +1,8 @@
+<div id="snippet-<%= snippet.uuid %>" class="snippet border-top py-2 row">
+    <div class="col-9">
+        <%= snippet.name %> - <span class="text-secondary"><%= snippet.description %></span>
+    </div>
+    <div class="col text-end">
+        <%= link_to 'view', snippet_path(snippet.uuid) %>
+    </div>
+</div>
