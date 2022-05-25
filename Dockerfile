@@ -1,48 +1,42 @@
-FROM ruby:3.0.2
+FROM ruby:3.0.2-slim
 
-# replace shell with bash so we can source files
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-
-# node
-RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
-
-# yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
-# install packages
-RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends \
+RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
     build-essential \
+    gnupg2 \
     libpq-dev \
-    ghostscript\
+    postgresql-client \
     nodejs \
-    yarn
+    nano \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir -p /app
-RUN mkdir -p /usr/local/nvm
-WORKDIR /app
+ENV LANG=C.UTF-8 \
+    BUNDLE_JOBS=4 \
+    BUNDLE_RETRY=3 \
+    RAILS_ENV=production
 
-# Copy the Gemfile as well as the Gemfile.lock and install
-# the RubyGems. This is a separate step so the dependencies
-# will be cached unless changes to one of those two files
-# are made.
-COPY Gemfile Gemfile.lock package.json yarn.lock ./
-RUN gem install bundler -v 2.1.4
-# RUN gem install foreman -v 0.85.0
-RUN bundle install --verbose --jobs 12 --retry 5
-RUN yarn add @rails/webpacker
-RUN yarn install
+RUN gem update --system && gem install bundler
 
-# Copy the main application.
-COPY . ./
-RUN bundle exec rails assets:precompile
+WORKDIR /usr/src/app
 
-# Expose port 3000 to the Docker host, so we can access it
-# from the outside.
+COPY Gemfile* ./
+
+RUN bundle config frozen true \
+    && bundle config jobs 4 \
+    && bundle config deployment true \
+    && bundle config without 'development test' \
+    && bundle install
+
+COPY . .
+
+
+VOLUME ["$RAILS_ROOT/public"]
+# Precompile assets
+# SECRET_KEY_BASE or RAILS_MASTER_KEY is required in production, but we don't
+# want real secrets in the image or image history. The real secret is passed in
+# at run time
+ARG SECRET_KEY_BASE=fakekeyforassets
+RUN bin/rails assets:clobber && bundle exec rails assets:precompile
+
 EXPOSE 3000
 
-# The main command to run when the container starts. Also
-# tell the Rails dev server to bind to all interfaces by
-# default.
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

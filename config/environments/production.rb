@@ -90,4 +90,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # We allow unencrypted data so the demo seed works
+  config.active_record.encryption.support_unencrypted_data = true
 end

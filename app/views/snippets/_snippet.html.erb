@@ -3,6 +3,7 @@
         <%= snippet.name %> - <span class="text-secondary"><%= snippet.description %></span>
     </div>
     <div class="col text-end">
+        <%= content_tag :span, snippet.language, class: 'badge rounded-pill bg-light text-dark' %> 
         <%= link_to 'view', snippet_path(snippet.uuid) %>
     </div>
 </div>

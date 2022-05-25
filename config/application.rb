@@ -18,5 +18,10 @@ module TrustBin
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.to_prepare do
+      # Configure single controller layout
+      Devise::SessionsController.layout "session"
+    end
   end
 end

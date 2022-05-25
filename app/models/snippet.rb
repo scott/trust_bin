@@ -2,7 +2,8 @@ class Snippet < ApplicationRecord
   belongs_to :user
 
   encrypts :content
-  encrypts :name
+  encrypts :name, deterministic: true
+  encrypts :description, deterministic: true
 
   scope :org, -> { where(visibility: 'org') }
   scope :priv, -> { where(visibility: 'private') }
