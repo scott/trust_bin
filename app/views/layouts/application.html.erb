@@ -46,12 +46,11 @@
           <ul>
           <% end %>
         </div>
-        <div class="col-md-12">
-
-          <p class=""><%= notice %></p>
-          <p class=""><%= alert %></p>
+        <div class="col-md-12 mt-5">
+          <%= raw flash_messages(flash) %>
+          
           <%= yield %>
-        </>
+        </div>
       </div>
     </div>
   </body>

@@ -37,6 +37,7 @@ class SnippetsController < ApplicationController
     @snippet.user_id = current_user.id
     @snippet.uuid = SecureRandom.uuid
     if @snippet.save
+      flash[:success] = "Snippet successfully created"
       redirect_to snippet_path(uuid: @snippet.uuid)
     else
       render :new
@@ -47,6 +48,7 @@ class SnippetsController < ApplicationController
     snippet = current_user.snippets.find_by(uuid: params[:uuid])
     snippet.deleted_at = Time.now
     snippet.save!
+    flash[:success] = "Snippet successfully deleted"
     redirect_to snippets_path
   end
 
