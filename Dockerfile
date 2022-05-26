@@ -20,11 +20,13 @@ WORKDIR /usr/src/app
 
 COPY Gemfile* ./
 
-RUN bundle config frozen true \
-    && bundle config jobs 4 \
-    && bundle config deployment true \
-    && bundle config without 'development test' \
-    && bundle install
+# RUN bundle config frozen true \
+#     && bundle config jobs 4 \
+#     && bundle config deployment true \
+#     && bundle config without 'development test' \
+#     && bundle install
+
+RUN bundle install
 
 COPY . .
 
