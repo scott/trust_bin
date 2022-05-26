@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :is_admin?
+  # before_action :is_admin?
 
   def index
     @users = User.all
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = Scrubber.find(params[:uuid])
+    @user = User.find(params[:uuid])
     if @user.update(user_params)
       redirect_to users_path
     else
@@ -23,9 +23,19 @@ class UsersController < ApplicationController
   end
 
   def create
+    @user = User.new(user_params)
+    @user.uuid = SecureRandom.uuid
+    binding.pry
+    if @user.save
+      redirect_to users_path
+    else
+      render :new
+    end
   end
 
   def destroy
+    @user.find_by(uuid: params[:uuid])
+    @user.destroy
   end
 
   private 
@@ -36,7 +46,8 @@ class UsersController < ApplicationController
       :last_name,
       :role,
       :email,
-      :password
+      :password,
+      :password_confirmation
     )
   end
   

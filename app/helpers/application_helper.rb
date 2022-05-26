@@ -18,6 +18,14 @@ module ApplicationHelper
       end
     end.join
   end
+
+  def logo
+    content_tag :h3 do 
+      content_tag :strong do
+        "Trustbin"
+      end           
+    end
+  end
 end
 
 
