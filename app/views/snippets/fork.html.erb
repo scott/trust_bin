@@ -2,7 +2,7 @@
 <%= simple_form_for @snippet do |f| %>
   <%= f.input :name %>
   <%= f.input :content %>
-  <%= f.input :parent_id, as: :hidden %>
+  <%= f.input :parent_uuid, as: :hidden %>
   <%= f.input :version, as: :hidden %>
   <%= f.button :submit %>
 <% end %>

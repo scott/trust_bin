@@ -9,7 +9,7 @@
   </style>
 
   <%= f.input :content, input_html: { value: @snippet.content.blank? ? "" : @snippet.content }, label: false, class: 'border border-secondary' %>
-  <%= f.input :parent_id, as: :hidden %>
+  <%= f.input :parent_uuid, as: :hidden %>
   <%= f.input :version, as: :hidden %>
   <%= f.input :visibility, collection: ['private','org'] %>
   <br/>

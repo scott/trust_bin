@@ -8,9 +8,13 @@ class SnippetsController < ApplicationController
   end
 
   def show
-    @snippet = current_user.snippets.active.where(uuid: params[:uuid]).order(version: :desc).first
-    @versions = @snippet.versions.order(version: :desc)
-    @current = @versions.size > 0 ? @versions.first : @snippet
+    if params[:version].present?
+      @snippet = Snippet.find_by(uuid: params[:uuid])
+    else
+      @snippet = Snippet.where(parent_uuid: params[:uuid]).order(version: :desc).first
+    end
+
+    @versions = Snippet.where(parent_uuid: @snippet.parent_uuid).order(version: :desc)
   end
 
   def new
@@ -18,15 +22,15 @@ class SnippetsController < ApplicationController
   end
 
   def fork
-    snippet = current_user.snippets.active.find_by(uuid: params[:snippet_uuid])
-    parent = snippet.parent_id.nil? ? snippet.id : snippet.parent_id
+    snippet = Snippet.active.find_by(uuid: params[:snippet_uuid])
     @snippet = Snippet.new(
       name: snippet.name,
       content: snippet.content,
-      parent_id: parent,
+      parent_uuid: snippet.parent_uuid,
       version: snippet.version + 1,
       description: snippet.description,
-      language: snippet.language
+      language: snippet.language,
+      visibility: snippet.visibility
     )
 
     render :new
@@ -60,7 +64,7 @@ class SnippetsController < ApplicationController
       :description,
       :language,
       :content,
-      :parent_id,
+      :parent_uuid,
       :version,
       :visibility
     )

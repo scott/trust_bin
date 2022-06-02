@@ -2,7 +2,7 @@
 
 <%= content_tag :h4 do %>
   <%= @snippet.name %>
-  <%= content_tag :small, @current.description, class: 'text-secondary' %>
+  <%= content_tag :small, @snippet.description, class: 'text-secondary' %>
 <% end %>
 <style>
 .CodeMirror {
@@ -10,10 +10,10 @@
   height: auto;
 }
 </style>
-<%= text_area_tag "snippet_content", @current.content %>
+<%= text_area_tag "snippet_content", @snippet.content %>
 <ul class="list-unstyled list-inline">
-    <li class="list-inline-item"><%= button_to 'edit', snippet_fork_path(@current.uuid), method: :get, class: 'btn btn-secondary' %></li>
-    <li class="list-inline-item"><%= button_to 'destroy', snippet_path(@current.uuid), method: :delete, class: 'btn btn-secondary' %></li>
+    <li class="list-inline-item"><%= button_to 'edit', snippet_fork_path(@snippet.uuid), method: :get, class: 'btn btn-secondary' %></li>
+    <li class="list-inline-item"><%= button_to 'destroy', snippet_path(@snippet.uuid), method: :delete, class: 'btn btn-secondary' %></li>
 </ul>
 <br/>
 <%= content_tag :h4, "Revisions" if @versions.present? %>

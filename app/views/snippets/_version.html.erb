@@ -6,6 +6,6 @@
         <%= version.name %> - <span class="text-secondary"><%= version.description %></span>
     </div>
     <div class="col text-end">
-        <%= link_to 'view', snippet_path(version.uuid) %>
+        <%= link_to 'view', snippet_path(version.uuid, version: version.version) %>
     </div>
 </div>

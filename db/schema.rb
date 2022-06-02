@@ -24,10 +24,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_023225) do
     t.text "content"
     t.string "visibility", default: "private"
     t.datetime "deleted_at"
-    t.integer "parent_id"
+    t.string "parent_uuid"
     t.integer "version", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["parent_uuid"], name: "index_snippets_on_parent_uuid"
     t.index ["shortlink"], name: "index_snippets_on_shortlink"
     t.index ["user_id"], name: "index_snippets_on_user_id"
     t.index ["uuid"], name: "index_snippets_on_uuid"

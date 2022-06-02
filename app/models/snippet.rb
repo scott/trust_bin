@@ -7,8 +7,9 @@ class Snippet < ApplicationRecord
 
   scope :org, -> { where(visibility: 'org') }
   scope :priv, -> { where(visibility: 'private') }
-  scope :root, -> { where(parent_id: nil) }
+  scope :root, -> { where(version: 1) }
   scope :active, -> { where(deleted_at: nil) }
+  scope :latest, -> { order(version: :desc) }
 
   LANGUAGES = [
     "shell",
@@ -21,10 +22,10 @@ class Snippet < ApplicationRecord
   ]
 
   def parent
-    Snippet.find_by(parent_id: parent_id)
+    Snippet.find_by(parent_uuid: uuid, version: 1)
   end
 
   def versions
-    Snippet.where("id = ? OR parent_id = ? OR parent_id = ? OR id = ?", id, id, parent_id, parent_id)
+    Snippet.where("parent_uuid = ?", uuid)
   end
 end

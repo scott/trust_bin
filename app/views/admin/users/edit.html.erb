@@ -1,0 +1,3 @@
+<%= simple_form_for(@user, url: admin_user_path(uuid: @user.uuid)) do |f| %>
+    <%= render partial: 'admin/users/form', locals: { f: f } %>
+<% end %>

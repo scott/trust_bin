@@ -1,5 +1,6 @@
 
 user = User.create!(email: 'admin@test.com', password: '12345678', uuid: SecureRandom.uuid, role: 'admin')
+snippet_uuid = SecureRandom.uuid
 snippet = Snippet.create!(name: 'Ruby sample', description: 'demo of Ruby highlighting', content: "#
 # Function to evaluate a polynomial at x.  The polynomial is given
 # as a list of coefficients, from the greatest to the least.
@@ -12,7 +13,8 @@ def polyval(x, coef)
         sum *= x                # This happens the right number of times.
     end
     return sum
-end", uuid: SecureRandom.uuid, user_id: user.id, visibility: 'org', language: 'ruby')
+end", uuid: snippet_uuid, parent_uuid: snippet_uuid, user_id: user.id, visibility: 'org', language: 'ruby')
+snippet_uuid = SecureRandom.uuid
 snippet = Snippet.create!(name: 'Golang code', description: 'A sample of Go code', content: "// Prime Sieve in Go.
 // Taken from the Go specification.
 // Copyright © The Go Authors.
@@ -54,4 +56,4 @@ func sieve() {
 func main() {
 	sieve()
 }
-", uuid: SecureRandom.uuid, user_id: user.id, visibility: 'org', language: 'go')
+", uuid: snippet_uuid, parent_uuid: snippet_uuid, user_id: user.id, visibility: 'org', language: 'go')

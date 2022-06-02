@@ -1,5 +1,5 @@
-class UsersController < ApplicationController
-  # before_action :is_admin?
+class Admin::UsersController < ApplicationController
+  before_action :is_admin
 
   def index
     @users = User.all
@@ -14,9 +14,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:uuid])
+    @user = User.find_by(uuid: params[:uuid])
     if @user.update(user_params)
-      redirect_to users_path
+      redirect_to admin_users_path
     else
       render :edit
     end    
@@ -25,17 +25,23 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.uuid = SecureRandom.uuid
-    binding.pry
     if @user.save
-      redirect_to users_path
+      redirect_to admin_users_path
     else
       render :new
     end
   end
 
   def destroy
-    @user.find_by(uuid: params[:uuid])
+    
+    @user = User.find_by(uuid: params[:uuid])
     @user.destroy
+    redirect_to admin_users_path
+  end
+
+  def is_admin
+    return if current_user.role == 'admin' 
+    redirect_to root_path
   end
 
   private 
@@ -51,7 +57,5 @@ class UsersController < ApplicationController
     )
   end
   
-  def is_admin?
-    current_user.role == 'admin'
-  end
+
 end

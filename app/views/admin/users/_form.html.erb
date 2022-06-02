@@ -4,4 +4,4 @@
 <%= f.input :role, collection: ["admin","user"] %>
 <%= f.input :password %>
 <%= f.input :password_confirmation %>
-<%= f.button :submit, class: 'btn btn-primary' %> <%#= link_to '[Delete]', user_path(id: @user.id), method: :delete, class: 'btn btn-secondary', data: { confirm: 'Are you sure?' } %>
+<%= f.button :submit, class: 'btn btn-primary' %> <%= button_to '[Delete]', admin_user_path(id: @user.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>

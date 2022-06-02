@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+
   devise_for :users
-  resources :users, param: :uuid
+  
+  namespace :admin do
+    resources :users, param: :uuid
+  end
   resources :snippets, param: :uuid do
     get "fork" => "snippets#fork"
   end
