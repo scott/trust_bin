@@ -14,6 +14,19 @@ def polyval(x, coef)
     end
     return sum
 end", uuid: snippet_uuid, parent_uuid: snippet_uuid, user_id: user.id, visibility: 'org', language: 'ruby')
+snippet = Snippet.create!(name: 'Ruby sample', description: 'demo of Ruby highlighting', content: "# VERSION 2
+# Function to evaluate a polynomial at x.  The polynomial is given
+# as a list of coefficients, from the greatest to the least.
+def polyval(x, coef)
+    sum = 0
+    coef = coef.clone           # Don't want to destroy the original
+    while true
+        sum += coef.shift       # Add and remove the next coef
+        break if coef.empty?    # If no more, done entirely.
+        sum *= x                # This happens the right number of times.
+    end
+    return sum
+end", uuid: SecureRandom.uuid, parent_uuid: snippet_uuid, user_id: user.id, visibility: 'org', language: 'ruby', version: 2)
 snippet_uuid = SecureRandom.uuid
 snippet = Snippet.create!(name: 'Golang code', description: 'A sample of Go code', content: "// Prime Sieve in Go.
 // Taken from the Go specification.

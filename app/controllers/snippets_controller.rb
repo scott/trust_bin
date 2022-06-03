@@ -8,13 +8,12 @@ class SnippetsController < ApplicationController
   end
 
   def show
-    if params[:version].present?
-      @snippet = Snippet.find_by(uuid: params[:uuid])
-    else
-      @snippet = Snippet.where(parent_uuid: params[:uuid]).order(version: :desc).first
-    end
-
-    @versions = Snippet.where(parent_uuid: @snippet.parent_uuid).order(version: :desc)
+      if params[:version].present?
+        @snippet = Snippet.find_by(uuid: params[:uuid])
+      else
+        @snippet = Snippet.where("uuid = ? OR parent_uuid = ?", params[:uuid], params[:uuid]).order(version: :desc).first
+      end    
+      @versions = Snippet.where("parent_uuid = ?", @snippet.parent_uuid).order(version: :desc)
   end
 
   def new
@@ -39,7 +38,9 @@ class SnippetsController < ApplicationController
   def create
     @snippet = Snippet.new(snippet_params)
     @snippet.user_id = current_user.id
-    @snippet.uuid = SecureRandom.uuid
+    uuid = SecureRandom.uuid
+    @snippet.uuid = uuid
+    @snippet.parent_uuid = uuid if params[:snippet][:parent_uuid].blank?
     if @snippet.save
       flash[:success] = "Snippet successfully created"
       redirect_to snippet_path(uuid: @snippet.uuid)

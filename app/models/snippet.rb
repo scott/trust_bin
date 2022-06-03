@@ -18,8 +18,17 @@ class Snippet < ApplicationRecord
     "htmlmixed",
     "go",
     "python",
-    "php"
-  ]
+    "php",
+    "css",
+    "dockerfile",
+    "elixir",
+    "earlang",
+    "java",
+    "markdown",
+    "php",
+    "rust",
+    "yaml"
+  ].sort.freeze
 
   def parent
     Snippet.find_by(parent_uuid: uuid, version: 1)
