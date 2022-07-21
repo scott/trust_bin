@@ -1,0 +1,8 @@
+spec:
+  name: trustbin
+  services:
+  - environment_slug: ruby-on-rails
+    git:
+      branch: add-deploy-button
+      repo_clone_url: https://github.com/scott/trust_bin.git
+    name: trustbin

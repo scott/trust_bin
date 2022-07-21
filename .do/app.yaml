@@ -1,0 +1,62 @@
+name: trustbin
+region: nyc
+
+databases:
+- engine: PG
+  name: db
+  num_nodes: 1
+  size: db-s-dev-database
+  version: "13"
+
+services:
+- environment_slug: ruby-on-rails
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${db.DATABASE_URL}
+  - key: RAILS_SERVE_STATIC_FILES
+    scope: RUN_TIME
+    value: true
+  - key: DISABLE_DATABASE_ENVIRONMENT_CHECK
+    scope: RUN_TIME
+    value: true
+  - key: RAILS_LOG_TO_STDOUT
+    scope: RUN_TIME
+    value: true
+  github:
+    branch: master
+    deploy_on_push: true
+    repo: scott/trust_bin
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: trust_bin
+  routes:
+  - path: /
+  run_command: rails server -p $PORT -e ${RAILS_ENV:-production}
+  source_dir: /
+
+jobs:
+- environment_slug: ruby-on-rails
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${db.DATABASE_URL}
+  - key: RAILS_SERVE_STATIC_FILES
+    scope: RUN_TIME
+    value: true
+  - key: DISABLE_DATABASE_ENVIRONMENT_CHECK
+    scope: RUN_TIME
+    value: true
+  - key: RAILS_LOG_TO_STDOUT
+    scope: RUN_TIME
+    value: true
+  github:
+    branch: master
+    deploy_on_push: true
+    repo: scott/trust_bin
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  kind: POST_DEPLOY
+  name: trust_bin-migrate
+  run_command: bundle exec rails db:migrate

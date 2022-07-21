@@ -9,6 +9,8 @@ frequently need to share snippets between team members. Instead of relying on
 public cloud available services like gist, spin up your own instance of the private,
 self-hosted alternative.
 
+[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/scott/trust_bin/tree/add-deploy-button)
+
 ## Getting Started
 
 Trustbin runs on Rails 7, Ruby 3 and uses Postgresql to store your snippets.  Run
