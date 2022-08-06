@@ -22,7 +22,7 @@ module ApplicationHelper
   def logo
     content_tag :h3 do 
       content_tag :strong do
-        "Trustbin"
+        "Trustb.in"
       end           
     end
   end
