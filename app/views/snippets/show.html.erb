@@ -10,14 +10,26 @@
   height: auto;
 }
 </style>
-<%= text_area_tag "snippet_content", @snippet.content %>
-<ul class="list-unstyled list-inline">
-    <li class="list-inline-item"><%= button_to 'edit', snippet_fork_path(@snippet.uuid), method: :get, class: 'btn btn-secondary' %></li>
-    <li class="list-inline-item"><%= button_to 'destroy', snippet_path(@snippet.uuid), method: :delete, class: 'btn btn-secondary' %></li>
-</ul>
 <br/>
-<%= content_tag :h4, "Revisions" if @versions.present? %>
-<%= render partial: 'version', collection: @versions %>
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-code-tab" data-bs-toggle="tab" data-bs-target="#nav-code" type="button" role="tab" aria-controls="nav-code" aria-selected="true">Code</button>
+    <button class="nav-link" id="nav-versions-tab" data-bs-toggle="tab" data-bs-target="#nav-versions" type="button" role="tab" aria-controls="nav-versions" aria-selected="false">Versions</button>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-code" role="tabpanel" aria-labelledby="nav-code-tab" tabindex="0">
+    <%= text_area_tag "snippet_content", @snippet.content %>
+    <ul class="list-unstyled list-inline">
+        <li class="list-inline-item"><%= button_to 'edit', snippet_fork_path(@snippet.uuid), method: :get, class: 'btn btn-secondary' %></li>
+        <li class="list-inline-item"><%= button_to 'destroy', snippet_path(@snippet.uuid), method: :delete, class: 'btn btn-secondary' %></li>
+    </ul>  
+  </div>
+  <div class="tab-pane fade" id="nav-versions" role="tabpanel" aria-labelledby="nav-versions-tab" tabindex="0">
+    <%= render partial: 'version', collection: @versions %>
+  </div>
+</div>
+
 <script>
 var codeEditor = document.getElementById("snippet_content");
 var myCodeMirror = CodeMirror.fromTextArea(codeEditor, {
