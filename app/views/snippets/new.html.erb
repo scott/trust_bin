@@ -19,7 +19,7 @@
 var codeEditor = document.getElementById("snippet_content");
 var myCodeMirror = CodeMirror.fromTextArea(codeEditor, {
     lineNumbers: true,
-    mode: null
+    mode: "<%= @snippet.language.presence %>",
   }
 );
 
