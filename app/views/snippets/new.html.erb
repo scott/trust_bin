@@ -25,6 +25,6 @@ var myCodeMirror = CodeMirror.fromTextArea(codeEditor, {
 
 function changeMode(option) {
   lang = document.getElementById("snippet_language").value;
-  myCodeMirror.display.mode = lang;
+  myCodeMirror.setOption("mode", lang)
 }
 </script>

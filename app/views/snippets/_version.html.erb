@@ -1,6 +1,6 @@
 <div id="snippet-<%= version.uuid %>" class="snippet border-bottom py-2 row">
     <div class="col">
-        <%= version.version %> - <%= version.created_at %>
+        <%= version.version %> - <%= time_ago(version.created_at) %>
     </div>
     <div class="col-6">
         <%= version.name %> - <span class="text-secondary"><%= version.description %></span>

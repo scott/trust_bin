@@ -26,6 +26,32 @@ module ApplicationHelper
       end           
     end
   end
-end
+
+  # 
+  # Shows either the time go in words, or the date, depending on
+  # how long ago it was
+  def time_ago(time_to_check)
+    diff = distance_of_time_in(:days, Time.now, time_to_check)
+    if diff <= 2
+      "Last updated #{time_ago_in_words(@snippet.updated_at)} ago"
+    else
+      "Updated #{time_to_check.strftime("%m-%d-%Y")}"
+    end
+  end
+
+
+  def distance_of_time_in(unit, from, to)
+    diff = to - from
+
+    if 1.respond_to? unit
+      distance = diff / 1.send(unit)
+      distance.abs.round
+    else
+      raise ArgumentError, "#{unit.inspect} is not supported as unit"
+    end
+  end
+
+
+  end
 
 

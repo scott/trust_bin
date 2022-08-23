@@ -3,7 +3,7 @@
 <%= content_tag :h4 do %>
   <%= @snippet.name %>
   <%= content_tag :small, @snippet.description, class: 'text-secondary' %><br/>
-  <%= content_tag :small, "Last updated #{time_ago_in_words(@snippet.updated_at)} ago", class: "fs-6 text-secondary" %>
+  <%= content_tag :small, time_ago(@snippet.updated_at), class: "fs-6 text-secondary" %>
 
 <% end %>
 <style>
