@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Trustb.in</title>
+    
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -43,7 +44,6 @@
         </div>
         <div class="col-md-12 mt-5">
           <%= raw flash_messages(flash) %>
-          
           <%= yield %>
         </div>
       </div>

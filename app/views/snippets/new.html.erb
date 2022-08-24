@@ -1,7 +1,5 @@
 <%= simple_form_for @snippet do |f| %>
-  <%= f.input :name, as: :string, placeholder: 'Name this snippet', label: false %>
-  <%= f.input :language, collection: Snippet::LANGUAGES, label: false, prompt: 'Language', input_html: { onchange: "changeMode(this);" } %>
-  <%= f.input :description, placeholder: 'Description', label: false  %>
+
   <style>
   .CodeMirror {
       height: 600px;
@@ -9,6 +7,9 @@
   </style>
 
   <%= f.input :content, input_html: { value: @snippet.content.blank? ? "" : @snippet.content }, label: false, class: 'border border-secondary' %>
+  <%= f.input :language, collection: Snippet::LANGUAGES, label: false, prompt: 'Language', input_html: { onchange: "changeMode(this);" } %>
+  <%= f.input :name, as: :string, placeholder: 'Name this snippet', label: false %>
+  <%= f.input :description, placeholder: 'Description', label: false  %>
   <%= f.input :parent_uuid, as: :hidden %>
   <%= f.input :version, as: :hidden %>
   <%= f.input :visibility, collection: ['private','org'] %>

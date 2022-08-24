@@ -1,4 +1,15 @@
-<h4>Secure Snippets</h4>
-<%= render partial: "snippet", collection: @snippets %>
-<br/>
-<%= link_to "[+] New", new_snippet_path, class: 'btn btn-primary' %>
+<div class="row">
+  <div class="col-md-3 mt-5">
+    
+  </div>
+  <div class="col-md-9 mt-5">
+      <div class="row row-cols-1 row-cols-md-1 g-4">
+      <%= render partial: "snippet", collection: @snippets %>
+      </div>
+      <br/>
+      <%= link_to "[+] New", new_snippet_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+
+
+
