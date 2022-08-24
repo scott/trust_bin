@@ -3,7 +3,7 @@ class SnippetsController < ApplicationController
     if params[:show].blank?
       @snippets = Snippet.active.org.root.all
     else
-      @snippets = current_user.snippets.active.root
+      @snippets = Snippet.active.root
     end
   end
 
@@ -15,6 +15,13 @@ class SnippetsController < ApplicationController
       end    
       @versions = Snippet.where("parent_uuid = ?", @snippet.parent_uuid).order(version: :desc)
   end
+
+  def raw
+    @snippet = Snippet.find_by(uuid: params[:snippet_uuid])
+
+    render layout: false
+  end
+
 
   def new
     @snippet = Snippet.new
@@ -50,7 +57,7 @@ class SnippetsController < ApplicationController
   end
 
   def destroy
-    snippet = current_user.snippets.find_by(uuid: params[:uuid])
+    snippet = Snippets.find_by(uuid: params[:uuid])
     snippet.deleted_at = Time.now
     snippet.save!
     flash[:success] = "Snippet successfully deleted"
