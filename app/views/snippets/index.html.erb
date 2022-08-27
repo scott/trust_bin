@@ -1,8 +1,6 @@
 <div class="row">
-  <div class="col-md-3 mt-5">
-    
-  </div>
-  <div class="col-md-9 mt-5">
+
+  <div class="col-md-12 col-offset-md-2 mt-5">
       <div class="row row-cols-1 row-cols-md-1 g-4">
       <%= render partial: "snippet", collection: @snippets %>
       </div>
@@ -10,6 +8,8 @@
       <%= link_to "[+] New", new_snippet_path, class: 'btn btn-primary' %>
   </div>
 </div>
+
+
 
 
 

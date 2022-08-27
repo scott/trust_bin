@@ -1,13 +1,13 @@
 <div class="col">
-    <div class="card border-top py-2 row" id="snippet-<%= snippet.uuid %>">
+  <div class="card border-top py-2 row" id="snippet-<%= snippet.uuid %>">
     <div class="card-body">
-        <h5 class="card-title"><%= link_to snippet.name, snippet_path(snippet.uuid) %></h5>
-        <h6 class="card-subtitle mb-2 text-muted"><%= snippet.description %></h6>
-        <p class="card-text cursor-pointer" onclick="document.location='<%= snippet_path(snippet.uuid) %>'">
-            <%= text_area_tag "snippet_content_#{snippet.uuid}", snippet.content %>
-        </p>
+      <h5 class="card-title"><%= link_to snippet.name, snippet_path(snippet.uuid) %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= snippet.description %></h6>
+      <p class="card-text cursor-pointer" onclick="document.location='<%= snippet_path(snippet.uuid) %>'">
+          <%= text_area_tag "snippet_content_#{snippet.uuid}", snippet.content %>
+      </p>
     </div>
-    </div>
+  </div>
 </div>
 <script>
 var codeEditor = document.getElementById("snippet_content_<%= snippet.uuid %>");
@@ -15,7 +15,7 @@ var myCodeMirror = CodeMirror.fromTextArea(codeEditor, {
     lineNumbers: false,
     mode: "<%= snippet.language %>",
     readOnly: 'nocursor',
-    scrollbarStyle: 'null'
+    scrollbarStyle: null
   }
 );
 </script>

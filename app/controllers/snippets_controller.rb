@@ -13,7 +13,7 @@ class SnippetsController < ApplicationController
       else
         @snippet = Snippet.where("uuid = ? OR parent_uuid = ?", params[:uuid], params[:uuid]).order(version: :desc).first
       end    
-      @versions = Snippet.where("parent_uuid = ?", @snippet.parent_uuid).order(version: :desc)
+      @versions = Snippet.active.where("parent_uuid = ?", @snippet.parent_uuid).order(version: :desc)
   end
 
   def raw
@@ -22,19 +22,31 @@ class SnippetsController < ApplicationController
     render layout: false
   end
 
-
   def new
     @snippet = Snippet.new
   end
 
-  def fork
-    snippet = Snippet.active.find_by(uuid: params[:snippet_uuid])
+  def edit
+    snippet = Snippet.active.find_by(uuid: params[:uuid])
     @snippet = Snippet.new(
       name: snippet.name,
       content: snippet.content,
       parent_uuid: snippet.parent_uuid,
       version: snippet.version + 1,
       description: snippet.description,
+      language: snippet.language,
+      visibility: snippet.visibility
+    )
+    render :new
+  end
+
+  def fork
+    snippet = Snippet.active.find_by(uuid: params[:snippet_uuid])
+    @snippet = Snippet.new(
+      name: "#{snippet.name} [FORK]",
+      content: snippet.content,
+      version: 1,
+      description: '',
       language: snippet.language,
       visibility: snippet.visibility
     )
@@ -57,9 +69,9 @@ class SnippetsController < ApplicationController
   end
 
   def destroy
-    snippet = Snippets.find_by(uuid: params[:uuid])
-    snippet.deleted_at = Time.now
-    snippet.save!
+    snippets = Snippet.where(parent_uuid: params[:uuid])
+    snippets.update_all(deleted_at: Time.now)
+
     flash[:success] = "Snippet successfully deleted"
     redirect_to snippets_path
   end
