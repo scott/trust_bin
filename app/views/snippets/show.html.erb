@@ -5,13 +5,11 @@
   <%= content_tag :small, @snippet.description, class: 'text-secondary' %><br/>
   <%= content_tag :small, time_ago(@snippet.updated_at), class: "fs-6 text-secondary" %>
   <div class="float-end">
-    <% unless params[:version].present? %>
     <ul class="list-unstyled list-inline">
         <li class="list-inline-item"><%= button_to 'edit', edit_snippet_path(snippet_uuid: @snippet.uuid), method: :get, class: 'btn btn-secondary' %></li>
-        <li class="list-inline-item"><%= button_to 'destroy', snippet_path(@snippet.parent_uuid), method: :delete, class: 'btn btn-secondary' %></li>
+        <li class="list-inline-item"><%= button_to 'destroy', snippet_path(@snippet.parent_uuid), method: :delete, class: 'btn btn-secondary', form: {data: {turbo_confirm: 'Are you sure you want to delete this?'}} %></li>
         <li class="list-inline-item"><%= button_to 'fork', snippet_fork_path(snippet_uuid: @snippet.uuid), method: :get, class: 'btn btn-secondary' %></li>
     </ul>
-    <% end %>  
   </div>
 
 <% end %>
