@@ -1,9 +1,9 @@
 class SnippetsController < ApplicationController
   def index
     if params[:show].blank?
-      @snippets = Snippet.active.org.root.all
+      @snippets = Snippet.active.org.newest.root.all
     else
-      @snippets = Snippet.active.root
+      @snippets = Snippet.active.newest.root
     end
   end
 

@@ -10,6 +10,7 @@ class Snippet < ApplicationRecord
   scope :root, -> { where(version: 1) }
   scope :active, -> { where(deleted_at: nil) }
   scope :latest, -> { order(version: :desc) }
+  scope :newest, -> { order(created_at: :desc) }
 
   LANGUAGES = [
     "shell",
