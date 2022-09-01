@@ -1,0 +1,49 @@
+spec:
+  databases:
+  - engine: PG
+    name: db
+    num_nodes: 1
+    size: professional-xs
+    version: "12"
+  envs:
+  - key: DB_DATABASE
+    scope: RUN_AND_BUILD_TIME
+    value: ${DATABASE}
+  - key: DB_HOSTNAME
+    scope: RUN_AND_BUILD_TIME
+    value: ${HOSTNAME}
+  - key: DB_PORT
+    scope: RUN_AND_BUILD_TIME
+    value: ${PORT}
+  - key: DB_USERNAME
+    scope: RUN_AND_BUILD_TIME
+    value: ${USERNAME}
+  - key: DB_PASSWORD
+    scope: RUN_AND_BUILD_TIME
+    value: ${PASSWORD}
+  - key: RAILS_ENV
+    scope: RUN_AND_BUILD_TIME
+    value: production
+  - key: RAILS_SERVE_STATIC_FILES
+    scope: RUN_AND_BUILD_TIME
+    value: "true"
+  - key: RAILS_LOG_TO_STDOUT
+    scope: RUN_AND_BUILD_TIME
+    value: "true"
+  name: trustbin
+  region: nyc
+  services:
+  - envs:
+    - key: DATABASE_URL
+      scope: RUN_TIME
+      value: ${DATABASE_URL}
+    http_port: 8080
+    image:
+      registry_type: DOCR
+      repository: trustbin
+      tag: 2eb4a14
+    instance_count: 2
+    instance_size_slug: professional-xs
+    name: trustbinn
+    routes:
+    - path: /

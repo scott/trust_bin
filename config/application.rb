@@ -23,5 +23,17 @@ module TrustBin
       # Configure single controller layout
       Devise::SessionsController.layout "session"
     end
+
+    # store key reference in message
+    config.active_record.encryption.store_key_references = true
+
+    # We allow unencrypted data so the demo seed works
+    config.active_record.encryption.support_unencrypted_data = true
+
+    config.active_record.encryption.key_derivation_salt = "salt"
+    config.active_record.encryption.deterministic_key = "deterministic-key"
+    config.active_record.encryption.primary_key = "primary-key"
+
+
   end
 end
