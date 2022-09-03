@@ -9,7 +9,7 @@ frequently need to share snippets between team members. Instead of relying on
 public cloud available services like gist, spin up your own instance of the private,
 self-hosted alternative.
 
-[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/scott/trust_bin/tree/add-deploy-button)
+[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/scott/trust_bin/tree/do-button)
 
 ## Getting Started
 

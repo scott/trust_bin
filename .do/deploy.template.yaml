@@ -3,24 +3,9 @@ spec:
   - engine: PG
     name: db
     num_nodes: 1
-    size: professional-xs
+    size: db-s-dev-database
     version: "12"
   envs:
-  - key: DB_DATABASE
-    scope: RUN_AND_BUILD_TIME
-    value: ${DATABASE}
-  - key: DB_HOSTNAME
-    scope: RUN_AND_BUILD_TIME
-    value: ${HOSTNAME}
-  - key: DB_PORT
-    scope: RUN_AND_BUILD_TIME
-    value: ${PORT}
-  - key: DB_USERNAME
-    scope: RUN_AND_BUILD_TIME
-    value: ${USERNAME}
-  - key: DB_PASSWORD
-    scope: RUN_AND_BUILD_TIME
-    value: ${PASSWORD}
   - key: RAILS_ENV
     scope: RUN_AND_BUILD_TIME
     value: production
@@ -30,20 +15,55 @@ spec:
   - key: RAILS_LOG_TO_STDOUT
     scope: RUN_AND_BUILD_TIME
     value: "true"
+  - key: SECRET_KEY_BASE
+    scope: RUN_AND_BUILD_TIME
+    value: "REPLACE_WITH_SOMETHING_SECURE"
+  - key: DB_DATABASE
+    scope: RUN_AND_BUILD_TIME
+    value: ${db.DATABASE}
+  - key: DB_HOST
+    scope: RUN_AND_BUILD_TIME
+    value: ${db.HOSTNAME}
+  - key: DB_PORT
+    scope: RUN_AND_BUILD_TIME
+    value: ${db.PORT}
+  - key: DB_USER
+    scope: RUN_AND_BUILD_TIME
+    value: ${db.USERNAME}
+  - key: DB_PASSWORD
+    scope: RUN_AND_BUILD_TIME
+    value: ${db.PASSWORD}
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${db.DATABASE_URL}
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${db.DATABASE_URL}      
   name: trustbin
   region: nyc
   services:
-  - envs:
-    - key: DATABASE_URL
-      scope: RUN_TIME
-      value: ${DATABASE_URL}
-    http_port: 8080
-    image:
-      registry_type: DOCR
-      repository: trustbin
-      tag: 2eb4a14
-    instance_count: 2
-    instance_size_slug: professional-xs
-    name: trustbinn
-    routes:
-    - path: /
+    - environment_slug: ruby-on-rails
+      envs:
+      git:
+        branch: do-button
+        repo_clone_url: https://github.com/scott/trust_bin.git
+      http_port: 8080
+      instance_count: 1
+      instance_size_slug: basic-xxs
+      name: trustbin-app
+      routes:
+      - path: /
+      run_command: rails server -p $PORT -e ${RAILS_ENV:-production}
+      source_dir: /
+
+  # jobs:
+  # - name: trustbin-migrate
+  #   environment_slug: ruby-on-rails
+  #   git:
+  #     branch: do-button
+  #     repo_clone_url: https://github.com/scott/trust_bin.git
+  #   instance_count: 1
+  #   instance_size_slug: basic-xxs
+  #   kind: POST_DEPLOY
+  #   run_command: bundle exec rails db:install
+  #   source_dir: /
