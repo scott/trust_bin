@@ -41,10 +41,10 @@ spec:
     value: ${db.DATABASE_URL}
   - key: INITIAL_ADMIN_USER
     scope: RUN_AND_BUILD_TIME
-    value: 'administrator@test.com'
+    value: 'admin@change.me'
   - key: INITIAL_ADMIN_PASSWORD
     scope: RUN_AND_BUILD_TIME
-    value: "12345678"      
+    value: "changeme"      
   name: trustbin
   region: nyc
   services:
@@ -71,5 +71,5 @@ spec:
     instance_count: 1
     instance_size_slug: basic-xxs
     kind: POST_DEPLOY
-    run_command: bundle exec rails db:migrate && db:initialize
+    run_command: bundle exec rails db:migrate && rails db:initialize
     source_dir: /
