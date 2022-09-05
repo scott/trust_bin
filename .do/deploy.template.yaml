@@ -18,19 +18,19 @@ spec:
   - key: SECRET_KEY_BASE
     scope: RUN_AND_BUILD_TIME
     value: "REPLACE_WITH_SOMETHING_SECURE"
-  - key: DB_DATABASE
+  - key: POSTGRES_DB
     scope: RUN_AND_BUILD_TIME
     value: ${db.DATABASE}
-  - key: DB_HOST
+  - key: POSTGRES_HOST
     scope: RUN_AND_BUILD_TIME
     value: ${db.HOSTNAME}
-  - key: DB_PORT
+  - key: POSTGRES_PORT
     scope: RUN_AND_BUILD_TIME
     value: ${db.PORT}
-  - key: DB_USER
+  - key: POSTGRES_USER
     scope: RUN_AND_BUILD_TIME
     value: ${db.USERNAME}
-  - key: DB_PASSWORD
+  - key: POSTGRES_PASSWORD
     scope: RUN_AND_BUILD_TIME
     value: ${db.PASSWORD}
   - key: DATABASE_URL
