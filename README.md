@@ -17,7 +17,12 @@ Trustbin runs on Rails 7, Ruby 3 and uses Postgresql to store your snippets.  Ru
 Trustbin by cloning the repo and then using the docker compose to get up quickly.  Note
 that these steps expect Compose v2:
 
-First, copy .env.sample to .env and configure how you like.
+Clone the repo:
+```
+git clone https://github.com/scott/trustbin.git
+```
+
+Copy .env.sample to .env and configure how you like.
 ```
 cp .env.sample .env
 ```
