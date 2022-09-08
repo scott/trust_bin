@@ -6,7 +6,7 @@ services:
       - .:/usr/src/app
       - bundle:/usr/local/bundle
     ports:
-      - "3000:3000"
+      - "80:3000"
     env_file:
       - .env
     environment:
