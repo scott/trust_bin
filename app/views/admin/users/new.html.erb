@@ -1,3 +1,4 @@
 <%= simple_form_for @user, url: admin_users_path do |f| %>
     <%= render partial: 'admin/users/form', locals: { f: f } %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>

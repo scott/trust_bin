@@ -1,3 +1,6 @@
 <%= simple_form_for(@user, url: admin_user_path(uuid: @user.uuid)) do |f| %>
     <%= render partial: 'admin/users/form', locals: { f: f } %>
+    <%= f.button :submit, class: 'btn btn-primary' %> 
 <% end %>
+    
+<%= button_to '[Delete]', admin_user_path(id: @user.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } if params[:action] == 'edit' %>
