@@ -52,7 +52,7 @@ spec:
       envs:
       git:
         branch: main
-        repo_clone_url: https://github.com/scott/trust_bin.git
+        repo_clone_url: https://github.com/scott/trust_bin
       http_port: 8080
       instance_count: 1
       instance_size_slug: basic-xxs
@@ -67,7 +67,7 @@ spec:
     environment_slug: ruby-on-rails
     git:
       branch: main
-      repo_clone_url: https://github.com/scott/trust_bin.git
+      repo_clone_url: https://github.com/scott/trust_bin
     instance_count: 1
     instance_size_slug: basic-xxs
     kind: POST_DEPLOY
