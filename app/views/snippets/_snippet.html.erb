@@ -8,7 +8,11 @@
       </p>
     </div>
   </div>
+  <div class="float-end">
+    <small><%= image_tag "https://source.boringavatars.com/beam/20/#{snippet.user.email}?colors=264653,2a9d8f,e9c46a,f4a261,e76f51" %> Added by <%= snippet.user.email %> - <%= time_ago(snippet.updated_at) %></small>
+  </div>
 </div>
+
 <script>
 var codeEditor = document.getElementById("snippet_content_<%= snippet.uuid %>");
 var myCodeMirror = CodeMirror.fromTextArea(codeEditor, {

@@ -34,9 +34,9 @@
           <% if signed_in? %>
           <ul class="list-unstyled list-inline">
             <li class="list-inline-item"><%= link_to 'All', snippets_path %></li>
-            <li class="list-inline-item"><%= link_to 'Mine', snippets_path(show: 'private') %></li>
-            <li class="list-inline-item"><%= link_to 'New', new_snippet_path %></li>
-            <li class="list-inline-item"><%= current_user.email if signed_in? %></li>
+            <li class="list-inline-item"><%= link_to current_user.email, snippets_path(show: 'private') if signed_in? %></li>
+            <li class="list-inline-item"><%= link_to "GitHub", "https://github.com/scott/trust_bin" %></li>
+            <li class="list-inline-item"><%= link_to 'Team', admin_users_path if current_user.role == 'admin'  %></li>
             <li class="list-inline-item"><%= button_to 'Sign Out', destroy_user_session_path,
               method: :delete, class: 'btn btn-default' if signed_in? %></li>
           <ul>

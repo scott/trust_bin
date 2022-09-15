@@ -2,6 +2,5 @@
 <%= f.input :last_name %>
 <%= f.input :email %>
 <%= f.input :role, collection: ["admin","user"] %>
-<%= f.input :password %>
-<%= f.input :password_confirmation %>
-<%= f.button :submit, class: 'btn btn-primary' %> <%= button_to '[Delete]', admin_user_path(id: @user.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+<%= f.input :password if params[:action] == 'new' %>
+<%= f.input :password_confirmation if params[:action] == 'new' %>

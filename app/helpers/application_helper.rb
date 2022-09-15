@@ -33,7 +33,7 @@ module ApplicationHelper
   def time_ago(time_to_check)
     diff = distance_of_time_in(:days, Time.now, time_to_check)
     if diff <= 2
-      "Last updated #{time_ago_in_words(@snippet.updated_at)} ago"
+      "Last updated #{time_ago_in_words(time_to_check)} ago"
     else
       "Updated #{time_to_check.strftime("%m-%d-%Y")}"
     end
