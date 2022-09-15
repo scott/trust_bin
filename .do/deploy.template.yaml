@@ -51,7 +51,7 @@ spec:
     - environment_slug: ruby-on-rails
       envs:
       git:
-        branch: main
+        branch: master
         repo_clone_url: https://github.com/scott/trust_bin.git
       http_port: 8080
       instance_count: 1
@@ -66,7 +66,7 @@ spec:
   - name: trustbin-migrate
     environment_slug: ruby-on-rails
     git:
-      branch: main
+      branch: master
       repo_clone_url: https://github.com/scott/trust_bin.git
     instance_count: 1
     instance_size_slug: basic-xxs
