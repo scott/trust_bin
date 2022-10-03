@@ -1,9 +1,9 @@
 class SnippetsController < ApplicationController
   def index
     if params[:show].blank?
-      @snippets = Snippet.active.org.newest.root.all
+      @pagy, @snippets = pagy(Snippet.active.org.newest.root.all)
     else
-      @snippets = Snippet.active.newest.root
+      @pagy, @snippets = pagy(Snippet.active.newest.root)
     end
   end
 
@@ -13,7 +13,7 @@ class SnippetsController < ApplicationController
       else
         @snippet = Snippet.where("uuid = ? OR parent_uuid = ?", params[:uuid], params[:uuid]).order(version: :desc).first
       end    
-      @versions = Snippet.active.where("parent_uuid = ?", @snippet.parent_uuid).order(version: :desc)
+      @pagy, @versions = pagy(Snippet.active.where("parent_uuid = ?", @snippet.parent_uuid).order(version: :desc))
   end
 
   def raw

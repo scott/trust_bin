@@ -1,5 +1,7 @@
 module ApplicationHelper
 
+  include Pagy::Frontend
+  
   # Map flash error types to specific bs classes
   FLASH_CLASS = {
     notice: 'secondary',
