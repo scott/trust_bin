@@ -44,7 +44,16 @@ spec:
     value: 'admin@change.me'
   - key: INITIAL_ADMIN_PASSWORD
     scope: RUN_AND_BUILD_TIME
-    value: "changeme"      
+    value: "changeme"
+  - key: RAILS_SALT
+    scope: RUN_AND_BUILD_TIME
+    value: "changeme"
+  - key: RAILS_DETERMINISTIC_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: "changeme"
+  - key: RAILS_PRIMARY_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: "changeme"   
   name: trustbin
   region: nyc
   services:
