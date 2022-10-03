@@ -19,7 +19,6 @@ class Snippet < ApplicationRecord
     "htmlmixed",
     "go",
     "python",
-    "php",
     "css",
     "dockerfile",
     "elixir",
