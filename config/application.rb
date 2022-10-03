@@ -30,10 +30,9 @@ module TrustBin
     # We allow unencrypted data so the demo seed works
     config.active_record.encryption.support_unencrypted_data = true
 
-    config.active_record.encryption.key_derivation_salt = "salt"
-    config.active_record.encryption.deterministic_key = "deterministic-key"
-    config.active_record.encryption.primary_key = "primary-key"
-
+    config.active_record.encryption.key_derivation_salt = ENV['RAILS_SALT'] || "salt"
+    config.active_record.encryption.deterministic_key = ENV['RAILS_DETERMINISTIC_KEY'] || "deterministic-key"
+    config.active_record.encryption.primary_key = ENV['RAILS_PRIMARY_KEY'] || "primary-key"
 
   end
 end
