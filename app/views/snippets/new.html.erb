@@ -6,7 +6,11 @@
   }
   </style>
 
-  <%= f.input :content, input_html: { value: @snippet.content.blank? ? "" : @snippet.content }, label: false, class: 'border border-secondary' %>
+  <%= f.input :content, 
+              input_html: { value: @snippet.content.blank? ? "" : @snippet.content }, 
+              wrapper_html: { class: 'form-control' },
+              label: false, 
+              class: 'border border-secondary' %>
   <%= f.input :language, collection: Snippet::LANGUAGES, label: false, prompt: 'Language', input_html: { onchange: "changeMode(this);" } %>
   <%= f.input :name, as: :string, placeholder: 'Name this snippet', label: false %>
   <%= f.input :description, placeholder: 'Description', label: false  %>
