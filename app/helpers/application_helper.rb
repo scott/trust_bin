@@ -23,9 +23,8 @@ module ApplicationHelper
 
   def logo
     content_tag :h3 do 
-      content_tag :strong do
-        "Trustb.in"
-      end           
+      concat image_tag('logo.png', style: 'width: 35px; height: 35px; margin-right: 10px;')
+      concat content_tag(:strong, "Trustb.in")
     end
   end
 
@@ -52,8 +51,5 @@ module ApplicationHelper
       raise ArgumentError, "#{unit.inspect} is not supported as unit"
     end
   end
-
-
-  end
-
+end
 
