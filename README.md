@@ -19,7 +19,7 @@ that these steps expect Compose v2:
 
 Clone the repo:
 ```
-git clone https://github.com/scott/trustbin.git
+git clone https://github.com/scott/trust_bin.git
 ```
 
 Copy .env.sample to .env and configure how you like.
