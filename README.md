@@ -9,9 +9,13 @@ frequently need to share snippets between team members. Instead of relying on
 public cloud available services like gist, spin up your own instance of the private,
 self-hosted alternative.
 
+## Getting Started
+
+The easiest, simplest way to get this running is by deploying directly to the DigitalOcean App Platform, which will create a scalable cluster with a database backend for you.  Note, this takes a few minutes:
+
 [![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/scott/trust_bin/tree/master)
 
-## Getting Started
+## Installing with Docker
 
 Trustbin runs on Rails 7, Ruby 3 and uses Postgresql to store your snippets.  Run
 Trustbin by cloning the repo and then using the docker compose to get up quickly.  Note
@@ -54,6 +58,11 @@ docker compose run --rm -e EDITOR=nano web bin/rails credentials:edit
 Now create the database with
 ```
 docker compose run --rm web bin/rails db:setup
+```
+
+Precompile assets
+```
+docker compose run --rm web bin/rails assets:precompile
 ```
 
 Finally, run the app with
