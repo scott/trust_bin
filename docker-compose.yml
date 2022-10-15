@@ -1,12 +1,21 @@
 services:
+  caddy:
+      image: caddy:2.4.3-alpine
+      restart: unless-stopped
+      command: caddy reverse-proxy --from ${SITE_ADDRESS} --to http://web:3000
+      ports:
+        - 80:80
+        - 443:443
+      volumes:
+        - caddy:/data
+      depends_on:
+        - web
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bin/rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/usr/src/app
       - bundle:/usr/local/bundle
-    ports:
-      - "80:3000"
     env_file:
       - .env
     environment:
@@ -25,3 +34,4 @@ services:
 volumes:
   pg_data:
   bundle:
+  caddy:
