@@ -1,6 +1,6 @@
 services:
   caddy:
-    image: caddy:2.4.3-alpine
+    image: caddy:2.6.2-alpine
     restart: unless-stopped
     command: caddy reverse-proxy --from ${SITE_ADDRESS} --to http://web:3000
     ports:
