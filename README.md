@@ -9,17 +9,33 @@ frequently need to share snippets between team members. Instead of relying on
 public cloud available services like gist, spin up your own instance of the private,
 self-hosted alternative.
 
+## Getting Started
+
+The easiest, simplest way to get this running is by deploying directly to the DigitalOcean App Platform, which will create a scalable cluster with a database backend for you.  Note, this takes a few minutes:
+
 [![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/scott/trust_bin/tree/master)
 
-## Getting Started
+## Installing with Docker
 
 Trustbin runs on Rails 7, Ruby 3 and uses Postgresql to store your snippets.  Run
 Trustbin by cloning the repo and then using the docker compose to get up quickly.  Note
 that these steps expect Compose v2:
 
+Install Compose v2 if needed (Ubuntu):
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update -y
+apt-cache policy docker-ce
+sudo apt install docker-ce -y
+mkdir -p ~/.docker/cli-plugins/
+curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+chmod +x ~/.docker/cli-plugins/docker-compose
+```
+
 Clone the repo:
 ```
-git clone https://github.com/scott/trustbin.git
+git clone https://github.com/scott/trust_bin.git
 ```
 
 Copy .env.sample to .env and configure how you like.
@@ -42,6 +58,11 @@ docker compose run --rm -e EDITOR=nano web bin/rails credentials:edit
 Now create the database with
 ```
 docker compose run --rm web bin/rails db:setup
+```
+
+Precompile assets
+```
+docker compose run --rm web bin/rails assets:precompile
 ```
 
 Finally, run the app with
