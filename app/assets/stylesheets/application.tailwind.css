@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  h5 {
+    @apply text-xl font-semibold hover:font-bold;
+  }
+}

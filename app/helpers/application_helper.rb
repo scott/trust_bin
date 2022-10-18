@@ -22,10 +22,9 @@ module ApplicationHelper
   end
 
   def logo
-    content_tag :h3 do 
-      concat image_tag('logo.png', style: 'width: 35px; height: 35px; margin-right: 10px;')
-      concat content_tag(:strong, "Trustb.in")
-    end
+    concat image_tag('logo.png', class: 'h-9 w-9 float-left mr-2')
+    concat content_tag(:h3, "Trustb.in", class: 'font-semibold text-gray-800 text-lg')
+    concat content_tag(:div, "Private code bin for engineering teams", class: 'text-sm')
   end
 
   # 
