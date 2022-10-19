@@ -1,4 +1,5 @@
-<%= logo %>
+                      <%= image_tag('logo.png', class: 'h-9 w-9 float-left mr-2') %>
+                      <%= content_tag(:h3, "Trustb.in", class: 'font-semibold text-gray-800 text-lg') %>
 
 <br/>
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>

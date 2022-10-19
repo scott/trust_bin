@@ -14,7 +14,7 @@ module ApplicationHelper
     return if flash.blank?
 
     flash.map do |type, msg| 
-      content_tag :div, class: "alert alert-#{FLASH_CLASS[type.to_sym]} alert-dismissible fade show" do
+      content_tag :div, class: "alert-#{FLASH_CLASS[type.to_sym]}" do
         concat msg
         concat button_tag('', class: 'btn-close', data: { 'bs-dismiss': 'alert' } )
       end

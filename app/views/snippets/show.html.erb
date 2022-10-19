@@ -2,17 +2,17 @@
 
 <%= content_tag :h4 do %>
   <%= @snippet.name %>
-  <%= content_tag :small, @snippet.description, class: 'text-secondary' %><br/>
-  <%= content_tag :small, time_ago(@snippet.updated_at), class: "fs-6 text-secondary" %>
-  <div class="float-end">
-    <ul class="list-unstyled list-inline">
-        <li class="list-inline-item"><%= button_to 'edit', edit_snippet_path(snippet_uuid: @snippet.uuid), method: :get, class: 'btn btn-secondary' %></li>
-        <li class="list-inline-item"><%= button_to 'destroy', snippet_path(@snippet.parent_uuid), method: :delete, class: 'btn btn-secondary', form: {data: {turbo_confirm: 'Are you sure you want to delete this?'}} %></li>
-        <li class="list-inline-item"><%= button_to 'fork', snippet_fork_path(snippet_uuid: @snippet.uuid), method: :get, class: 'btn btn-secondary' %></li>
-    </ul>
-  </div>
-
+  <%= content_tag :small, @snippet.description, class: 'text-gray-500 font-normal' %><br/>
+  <%= content_tag :small, time_ago(@snippet.updated_at), class: "fs-6 text-gray-500 font-normal" %>
 <% end %>
+<div class="flex justify-end">
+  <ul class="list-none space-x-2">
+    <li class="inline-block"><%= button_to 'edit', edit_snippet_path(snippet_uuid: @snippet.uuid), method: :get, class: 'btn-outline' %></li>
+    <li class="inline-block"><%= button_to 'destroy', snippet_path(@snippet.parent_uuid), method: :delete, class: 'btn-outline', form: {data: {turbo_confirm: 'Are you sure you want to delete this?'}} %></li>
+    <li class="inline-block"><%= button_to 'fork', snippet_fork_path(snippet_uuid: @snippet.uuid), method: :get, class: 'btn-outline' %></li>
+  </ul>
+</div>
+
 <style>
 .CodeMirror {
   min-height: 600px;
@@ -20,22 +20,29 @@
 }
 </style>
 <br/>
-<nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <button class="nav-link active" id="nav-code-tab" data-bs-toggle="tab" data-bs-target="#nav-code" type="button" role="tab" aria-controls="nav-code" aria-selected="true">Code</button>
-    <button class="nav-link" id="nav-versions-tab" data-bs-toggle="tab" data-bs-target="#nav-versions" type="button" role="tab" aria-controls="nav-versions" aria-selected="false">Versions</button>
-    <button class="nav-link" id="nav-raw" type="button"><%= link_to "Raw", snippet_raw_path(@snippet.uuid), target: '_blank' %></button>
-  </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active shadow" id="nav-code" role="tabpanel" aria-labelledby="nav-code-tab" tabindex="0">
-    <%= text_area_tag "snippet_content", @snippet.content %>
 
-  </div>
-  <div class="tab-pane fade shadow" id="nav-versions" role="tabpanel" aria-labelledby="nav-versions-tab" tabindex="0">
-    <%= render partial: 'version', collection: @versions %>
-    <div class="mt-5">
-      <%== pagy_bootstrap_nav(@pagy) %>
+<div x-data="{ openTab: 1 }" class="">
+  <ul class="flex border-b">
+      <li @click="openTab = 1" class="mr-2">
+          <button :class="{ 'tab-active': openTab === 1 }" class="tab">Code</button>
+      </li>
+      <li @click="openTab = 2" class="mr-2">
+          <button :class="{ 'tab-active': openTab === 2 }" class="tab">Versions</button>
+      </li>
+      <li class="mr-2">
+          <button class="tab" id="nav-raw" type="button"><%= link_to "Raw", snippet_raw_path(@snippet.uuid), target: '_blank' %></button>
+      </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="" x-show="openTab === 1">
+      <%= text_area_tag "snippet_content", @snippet.content %>
+    </div>
+    <div class="" x-show="openTab === 2">
+      <%= render partial: 'version', collection: @versions %>
+      <div class="mt-5">
+        <%== pagy_nav(@pagy) %>
+      </div>
     </div>
   </div>
 </div>
