@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+
+  h4 {
+    @apply text-2xl font-bold;
+  }
+  
+  h5 {
+    @apply text-xl font-semibold hover:font-bold;
+  }
+
+  .btn {
+    @apply p-2 bg-sky-900 rounded hover:bg-sky-700 hover:text-white transition duration-300 text-white;
+  }
+
+  .btn-outline {
+    @apply py-3 px-4 text-black bg-white rounded outline outline-1 outline-gray-200 hover:outline-gray-500;
+  }
+
+  .tab {
+    @apply bg-white inline-block py-2 px-4 text-sky-900 hover:text-sky-700 font-semibold;
+  }
+
+  .tab-active {
+    @apply -mb-px bg-white inline-block border-l border-t border-r border-b-0 rounded-t py-2 px-4 text-sky-700 font-semibold;
+  }
+
+  .alert-success {
+    @apply bg-green-300 rounded text-green-900 outline-1 outline-green-900 p-4;
+  }
+
+  .pagy-nav {
+    @apply flex space-x-2;
+  }
+  
+  .pagy-nav-js {
+    @apply flex space-x-2;
+  }
+
+  .pagy-nav .page a,
+  .pagy-nav .page.active,
+  .pagy-nav .page.prev.disabled,
+  .pagy-nav .page.next.disabled,
+  .pagy-nav-js .page a,
+  .pagy-nav-js .page.active,
+  .pagy-nav-js .page.prev.disabled,
+  .pagy-nav-js .page.next.disabled {
+    @apply block rounded-lg px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
+
+    &:hover {
+      @apply bg-gray-300;
+    }
+
+    &:active {
+      @apply bg-gray-400 text-white;
+    }
+  }
+
+  .pagy-nav .page.prev.disabled,
+  .pagy-nav .page.next.disabled,
+  .pagy-nav-js .page.prev.disabled,
+  .pagy-nav-js .page.next.disabled {
+    @apply text-gray-400 cursor-default;
+
+    &:hover {
+      @apply text-gray-400 bg-gray-200;
+    }
+
+    &:active {
+      @apply text-gray-400 bg-gray-200;
+    }
+  }
+
+  .pagy-nav .page.active,
+  .pagy-nav-js .page.active {
+    @apply text-white cursor-default bg-gray-400;
+
+    &:hover {
+      @apply text-white bg-gray-400;
+    }
+
+    &:active {
+      @apply bg-gray-400 text-white;
+    }
+  }
+
+
+  .pagy-combo-nav-js {
+    @apply flex max-w-max rounded-full px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
+  }
+
+  .pagy-combo-nav-js .pagy-combo-input {
+    @apply bg-white px-2 rounded-sm
+  }
+
+  .pagy-combo-nav-js .page.prev,
+  .pagy-combo-nav-js .page.next {
+    &:hover {
+      @apply text-gray-800;
+    }
+
+    &:active {
+      @apply text-gray-800;
+    }
+  }
+
+  .pagy-combo-nav-js .page.prev.disabled,
+  .pagy-combo-nav-js .page.next.disabled {
+    @apply text-gray-400 cursor-default;
+  }
+
+  .form-control {
+    @apply mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+  }
+
+}

@@ -7,7 +7,7 @@ default: &default
 
 development:
   <<: *default
-  database: trustbin_development_os
+  database: trustbin_development
 
 test:
   <<: *default

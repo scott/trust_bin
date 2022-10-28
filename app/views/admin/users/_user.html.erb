@@ -1,11 +1,11 @@
-<div class="user row border-bottom border-secondary my-2" id="user_<%= user.uuid %>">
-    <div class="col-md-2 pb-2">
-        <%= image_tag "https://source.boringavatars.com/beam/40/#{user.email}?colors=264653,2a9d8f,e9c46a,f4a261,e76f51" %>
+<div class="flex border-b-2 items-center justify-center" id="user_<%= user.uuid %>">
+    <div class="flex-none py-2 mr-5">
+        <%= image_tag "https://source.boringavatars.com/beam/40/#{user.email}?colors=264653,2a9d8f,e9c46a,f4a261,e76f51", class: 'float-left' %>
     </div>
-    <div class="col-md-9 py-2">
+    <div class="w-1/2">
         <%= "#{user.first_name} #{user.last_name}" %> (<%= user.email %>)
     </div>
-    <div class="col-md-1 py-2">
-        <%= link_to 'edit', edit_admin_user_path(uuid: user.uuid) %>
+    <div class="w-1/2 text-right">
+        <%= link_to 'edit', edit_admin_user_path(uuid: user.uuid), class: 'btn-outline' %>
     </div>
 </div>
