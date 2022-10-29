@@ -40,8 +40,8 @@
     </div>
     <div class="" x-show="openTab === 2">
       <%= render partial: 'version', collection: @versions %>
-      <div class="mt-5">
-        <%== pagy_nav(@pagy) %>
+      <div class="flex w-full justify-center pt-5 mt-5">
+        <%== pagy_nav(@pagy) if @pagy.count > 10 %>
       </div>
     </div>
   </div>
