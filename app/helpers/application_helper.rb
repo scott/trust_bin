@@ -2,23 +2,34 @@ module ApplicationHelper
 
   include Pagy::Frontend
   
-  # Map flash error types to specific bs classes
-  FLASH_CLASS = {
-    notice: 'secondary',
-    alert: 'warning',
-    error: 'danger',
-    success: 'success'
-  }
+  # Map flash error types to specific classes
+  FLASH_COLOR = {
+    notice: 'slate',
+    alert: 'red',
+    error: 'orange',
+    success: 'green'
+  }.freeze
 
   def flash_messages(flash)
     return if flash.blank?
 
     flash.map do |type, msg| 
-      content_tag :div, class: "alert-#{FLASH_CLASS[type.to_sym]}" do
-        concat msg
-        concat button_tag('', class: 'btn-close', data: { 'bs-dismiss': 'alert' } )
-      end
+      content_tag :div, class: "w-full mb-5", 'x-data': "{ openFlash: 1, msg: '#{msg}'}" do
+        content_tag :div, "x-if: msg" do
+          content_tag :div, class: "flex items-center justify-between px-4 py-4 rounded text-white bg-#{FLASH_COLOR[type.to_sym]}-500 border-2 border-#{FLASH_COLOR[type.to_sym]}-500" do          
+            concat msg
+            # concat :span, 'X', "x-on:click=\"msg = ''\""
+            concat close_button
+          end
+        end
+      end 
     end.join
+  end
+
+  def close_button
+    content_tag :span, "x-on:click=\"msg = ''\"" do
+      "X"
+    end
   end
 
   def logo
