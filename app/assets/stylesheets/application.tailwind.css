@@ -30,7 +30,7 @@
   }
 
   .alert-success {
-    @apply bg-green-300 rounded text-green-900 outline-1 outline-green-900 p-4;
+    @apply bg-green-300 rounded text-green-900 border-1 border-green-900 p-4;
   }
 
   .pagy-nav {

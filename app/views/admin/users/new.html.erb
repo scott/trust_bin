@@ -1,3 +1,6 @@
+<%= content_tag :h4, class: 'mb-5' do %>
+  <%= "New Team Member" %>
+<% end %>
 <%= simple_form_for @user, url: admin_users_path do |f| %>
     <%= render partial: 'admin/users/form', locals: { f: f } %>
     <%= f.button :submit, class: 'btn btn-primary' %>

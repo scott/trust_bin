@@ -1,3 +1,7 @@
+<%= content_tag :h4, class: 'mb-5' do %>
+  <%= @snippet.name.present? ? "Edit \"#{@snippet.name}\"" : 'New Snippet' %>
+<% end %>
+
 <%= simple_form_for @snippet do |f| %>
 
   <style>
