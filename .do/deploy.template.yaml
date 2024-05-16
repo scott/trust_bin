@@ -4,7 +4,7 @@ spec:
     name: db
     num_nodes: 1
     size: db-s-dev-database
-    version: "12"
+    version: "14"
   envs:
   - key: RAILS_ENV
     scope: RUN_AND_BUILD_TIME
