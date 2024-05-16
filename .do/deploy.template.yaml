@@ -54,6 +54,8 @@ spec:
   - key: RAILS_PRIMARY_KEY
     scope: RUN_AND_BUILD_TIME
     value: "changeme"   
+  features:
+  - buildpack-stack=ubuntu-18
   name: trustbin
   region: nyc
   services:
